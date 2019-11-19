@@ -1,0 +1,31 @@
+{
+    "name": "yjtec/laravel-amqp-link",
+    "description": "Laravel AMQP",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "playhan",
+            "email": "2824643212@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php-amqplib/php-amqplib": "^2.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "Yjtec\\LaravelAmqpLink\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Yjtec\\LaravelAmqpLink\\AmqpLinkServiceProvider"
+            ],
+            "aliases": {
+                "AmqpLink": "Yjtec\\LaravelAmqpLink\\Facades\\AmqpLink"
+            }
+        }
+    }
+}
