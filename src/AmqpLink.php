@@ -36,7 +36,7 @@ class AmqpLink
      * @param array   $properties
      * @throws Exception\Configuration
      */
-    public function consume($queue, Closure $callback, $properties = [], $key = [])
+    public function consume($queue, Closure $callback, $key = [], $properties = [])
     {
         $properties['queue'] = $queue;
 

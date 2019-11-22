@@ -6,7 +6,7 @@ return [
     | Define which configuration should be used
     |--------------------------------------------------------------------------
     */
-    'use' => 'default',
+    'use' => 'production',
 
     /*
     |--------------------------------------------------------------------------
@@ -47,7 +47,7 @@ return [
             'consumer_exclusive'    => false,
             'consumer_nowait'       => false,
             'timeout'               => 0,
-            'persistent'            => false,
+            'persistent'            => true,
 
             'qos'                   => false,
             'qos_prefetch_size'     => 0,

@@ -24,7 +24,7 @@ class Consumer extends Base
      * @return bool
      * @throws \Exception
      */
-    public function consume($queue, Closure $closure, $key = '*')
+    public function consume($queue, Closure $closure, $key = [])
     {
         try {
             $this->messageCount = $this->getQueueMessageCount();
@@ -55,12 +55,10 @@ class Consumer extends Base
                     $this->getProperty('qos_a_global')
                 );
             }
-            if (is_array($key)) {
+            if (is_array($key) && !empty($key)) {
                 foreach ($key as $value) {
                     $this->getChannel()->queue_bind($queue, $this->getProperty('exchange'), $value);
                 }
-            } else {
-                $this->getChannel()->queue_bind($queue, $this->getProperty('exchange'), $key);
             }
 
             $this->getChannel()->basic_consume(
