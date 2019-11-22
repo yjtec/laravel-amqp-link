@@ -16,16 +16,16 @@ return [
     'properties' => [
 
         'production' => [
-            'host'                  => 'localhost',//连接地址
-            'port'                  => 5672,//端口
-            'username'              => '',//账号
-            'password'              => '',//密码
-            'vhost'                 => '/',//vhost
+            'host'                  => env('AMQP_HOST', 'localhost'),//连接地址
+            'port'                  => env('AMQP_PORT', 5672),//端口
+            'username'              => env('AMQP_USERNAME', ''),//账号
+            'password'              => env('AMQP_PASSWORD', ''),//密码
+            'vhost'                 => env('AMQP_VHOST', '/'),//vhost
             'connect_options'       => [],
             'ssl_options'           => [],
 
-            'exchange'              => 'amq.topic',//交换机
-            'exchange_type'         => 'topic',//交换机类型
+            'exchange'              => env('AMQP_EXCHANGE', 'amq.topic'),//交换机
+            'exchange_type'         => env('AMQP_EXCHANGE_TYPE', 'topic'),//交换机类型
             'exchange_passive'      => false,//是否被动模式
             'exchange_durable'      => true,//持久性
             'exchange_auto_delete'  => false,//是否自动删除
