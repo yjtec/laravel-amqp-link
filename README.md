@@ -3,26 +3,26 @@
 ### 用路由键推送消息
 
 ```php
-    Amqp::publish('routing-key', 'message');
+    AmqpLink::publish('routing-key', 'message');
 ```
 
 ### 用路由键推送消息并创建队列
 
 ```php	
-    Amqp::publish('routing-key', 'message' , ['queue' => 'queue-name']);
+    AmqpLink::publish('routing-key', 'message' , ['queue' => 'queue-name']);
 ```
 
 ### 带有路由键和覆盖属性的推送消息
 
 ```php	
-    Amqp::publish('routing-key', 'message' , ['exchange' => 'amq.direct']);
+    AmqpLink::publish('routing-key', 'message' , ['exchange' => 'amq.direct']);
 ```
 ## 消费信息
 
 ### 消费消息，确认并在没有消息时停止
 
 ```php
-Amqp::consume('queue-name', function ($message, $resolver) {
+AmqpLink::consume('queue-name', function ($message, $resolver) {
     		
    var_dump($message->body);
 
@@ -36,7 +36,7 @@ Amqp::consume('queue-name', function ($message, $resolver) {
 ### 永远消耗消息
 
 ```php
-Amqp::consume('queue-name', function ($message, $resolver) {
+AmqpLink::consume('queue-name', function ($message, $resolver) {
     		
    var_dump($message->body);
 
@@ -45,16 +45,28 @@ Amqp::consume('queue-name', function ($message, $resolver) {
 });
 ```
 
+### 自定义监听路由
+
+```php
+AmqpLink::consume('queue-name', function ($message, $resolver) {
+        
+   var_dump($message->body);
+
+   $resolver->acknowledge($message);
+        
+}, ['*', 'test.*']);
+```
+
 ### 使用自定义设置来消费消息
 
 ```php
-Amqp::consume('queue-name', function ($message, $resolver) {
+AmqpLink::consume('queue-name', function ($message, $resolver) {
     		
    var_dump($message->body);
 
    $resolver->acknowledge($message);
       
-}, [
+}, [], [
 	'timeout' => 2,
 	'vhost'   => 'vhost3'
 ]);
@@ -64,7 +76,7 @@ Amqp::consume('queue-name', function ($message, $resolver) {
 ### 发布消息
 
 ```php
-\Amqp::publish('', 'message' , [
+\AmqpLink::publish('', 'message' , [
     'exchange_type' => 'fanout',
     'exchange' => 'amq.fanout',
 ]);
@@ -73,7 +85,7 @@ Amqp::consume('queue-name', function ($message, $resolver) {
 ### 消费信息
 
 ```php
-\Amqp::consume('', function ($message, $resolver) {
+\AmqpLink::consume('', function ($message, $resolver) {
     var_dump($message->body);
     $resolver->acknowledge($message);
 }, [
