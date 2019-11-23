@@ -39,7 +39,7 @@ return [
             'queue_exclusive'       => false,
             'queue_auto_delete'     => false,
             'queue_nowait'          => false,
-            'queue_properties'      => ['x-ha-policy' => ['S', 'all']],
+            'queue_properties'      => ['x-ha-policy' => ['S', 'all'], 'x-queue-type' => ['S', 'classic']],
 
             'consumer_tag'          => '',
             'consumer_no_local'     => false,
